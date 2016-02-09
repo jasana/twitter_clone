@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 class ContactController extends Controller
 {
     public function index() {
-    	return 'Contact Page';
+    	
+    	return view('contact.index');
     }
 }
