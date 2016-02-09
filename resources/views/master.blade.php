@@ -20,14 +20,16 @@
       </button>
       <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home"></span></a>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
         <li><a href="/contact">Contact Us</a></li>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/login">Login</a></li>
+        @if(\Auth::check())
+          <li><a href="/logout">Logout</a></li>
+        @else
+          <li><a href="/register">Register</a></li>
+          <li><a href="/login">Login</a></li>
+        @endif
           </ul>
         </li>
       </ul>
