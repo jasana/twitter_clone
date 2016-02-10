@@ -21,7 +21,7 @@ class ProfileController extends Controller
     public function newTweet(Request $request) {
 
     	$this->validate($request, [
-    		'content' => 'required|max:140'
+    		'content' => 'required|min:4|max:140'
     	]);
 
     	$newTweet = new Tweet();
@@ -31,7 +31,6 @@ class ProfileController extends Controller
 
     	$newTweet->save();
 
-
     	return redirect('profile');
     }
     public function show($username){
@@ -39,7 +38,9 @@ class ProfileController extends Controller
     	// Find the user
     	$user = User::where('username', '=', $username)->firstOrFail();
 
-    	return view('profile.show', compact('user'));
+    	$userPosts = $user->tweets()->get();
+
+    	return view('profile.show', compact('user', 'userPosts'));
 
 
     }
