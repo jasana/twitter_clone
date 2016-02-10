@@ -17,6 +17,10 @@
 		<input class="form-control" type="text" name="name" id="name" placeholder="John Smith">
 	</div>
 	<div class="form-group">
+		<label for="username">Username: </label>
+		<input class="form-control" type="text" name="username" id="username" placeholder="jonny12">
+	</div>
+	<div class="form-group">
 		<label for="email">E-Mail: </label>
 		<input class="form-control" type="email" name="email" id="email" placeholder="example@mail.com">
 	</div>
@@ -36,7 +40,7 @@
 
 <ul>
 	@foreach($errors->all() as $error)
-		<li>{{ $error }}</li>
+		<li class="text-danger">{{ $error }}</li>
 	@endforeach
 </ul>
 
