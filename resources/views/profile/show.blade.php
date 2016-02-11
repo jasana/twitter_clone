@@ -18,25 +18,41 @@
 		</header>
 	</div>
 
-	@foreach( $userPosts as $tweet)
-<div class="bg-info">
-	<article class="tweet">
-	<hr>
-		<p class="bg-info">{{ $tweet->content }}</p>
-		<small class="bg-info">Posted: {{ $tweet->created_at }} by {{ $tweet->user->name }}</small>
+	@if(count($errors))
+		COMMENT FORM INVALID
+	@endif
 
-		<h2>Comments: </h2>
-		@forelse($tweet->comments as $comment)
-			<article>
-				<small>{{ $comment->user->name }} :</small>
-				<p>{{ $comment->content }}</p>
+	@foreach( $userPosts as $tweet)
+		<div class="bg-info">
+			<article class="tweet">
+			<hr>
+				<p class="bg-info">{{ $tweet->content }}</p>
+				<small class="bg-info">Posted: {{ $tweet->created_at }} by {{ $tweet->user->name }}</small>
+
+				<h2>Comments: </h2>
+				@if(\Auth::check())
+				<form action="/profile/new-comment" method="post">
+					{!! csrf_field() !!}
+					<input type="hidden" name="tweet-id" value="{{ $tweet->id }}">
+					<div>
+						<label for="comment">Comment: </label>
+						<textarea class="form-control" name="comment" id="comment" cols="3">{{ old('comment') }}</textarea>
+					</div>
+					<input class="btn btn-default" type="submit" value="Post">
+				</form>
+				@endif
+
+				@forelse($tweet->comments as $comment)
+					<article>
+						<small>{{ $comment->user->name }} :</small>
+						<p>{{ $comment->content }}</p>
+					</article>
+				@empty
+					<small>No comments... Be the first to reply!</small>
+				@endforelse
+				<hr>
 			</article>
-		@empty
-			<small>No comments... Be the first to reply!</small>
-		@endforelse
-		<hr>
-	</article>
-</div>
+		</div>
 	@endforeach
 
 
