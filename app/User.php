@@ -9,6 +9,9 @@ class User extends Authenticatable
     public function tweets() {
         return $this->hasMany('App\Tweet');
     }
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
 
 
     /**
