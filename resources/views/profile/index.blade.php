@@ -34,8 +34,13 @@
 		<label for="content">Tweet: </label>
 		<textarea class="form-control" name="content" id="content" cols="3">{{ old('content') }}</textarea>
 	</div>
-
-	<input class="btn btn-default" type="submit" value="Post">
+	<div>
+		<label for="tags">Tags: </label>
+		<textarea class="form-control" name="tags" id="tags" cols="3" placeholder="#food #gym #design">{{ old('tags') }}</textarea>
+	</div>
+	<div>
+		<input class="btn btn-default" type="submit" value="Post">
+	</div>
 </form>
 
 @if(count($errors))
